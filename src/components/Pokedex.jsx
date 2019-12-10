@@ -18,8 +18,7 @@ const Pokedex = ({ pokemonNodes, onLoadMore, loading }) => {
         {pkmnNodeList.map(pkmn => (
           <PokemonCard
             key={pkmn.order}
-            name={pkmn.name}
-            image={pkmn.sprites.front_default}
+            pokemon={pkmn}
           />
         ))}
       </Grid>
