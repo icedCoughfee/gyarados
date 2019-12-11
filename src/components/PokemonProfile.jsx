@@ -2,8 +2,7 @@ import React from "react";
 import { getPkmnImgId } from "../utility/pokemon";
 import CONSTANTS from "../constants";
 
-function PokemonProfile({ location }) {
-  const { pokemon } = location.state;
+function PokemonProfile({ pokemon }) {
   const { name } = pokemon;
   return (
     <>
