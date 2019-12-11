@@ -34,7 +34,6 @@ function PokemonCard({ pokemon }) {
     <Link
       to={{
         pathname,
-        state: { pokemon },
       }}
       className={classes.cardWrapper}
     >

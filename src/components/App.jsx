@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PokedexQuery from "./PokedexQuery";
-import PokemonProfile from "./PokemonProfile";
+import PokemonProfileQuery from "./PokemonProfileQuery";
 import "../styles/index.css";
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/pokemon/:name"
-            render={props => <PokemonProfile {...props} />}
+            render={props => <PokemonProfileQuery {...props} />}
           />
           <Route path="/" render={props => <PokedexQuery {...props} />} />
         </Switch>
