@@ -4,110 +4,174 @@ import gql from "graphql-tag";
 import PokemonProfile from "./PokemonProfile";
 
 const PKMN_SPECIES_QUERY = gql`
-  query GetPokemonSpecies($name: String) {
-    getPokemonSpecies(name: $name) {
+  query GetPokemon($name: String) {
+    getPokemon(name: $name) {
       id
-      name
       order
-      gender_rate
-      capture_rate
-      base_happiness
-      is_baby
-      hatch_counter
-      has_gender_differences
-      forms_switchable
-      growth_rate {
-        name
-        url
-      }
-      pokedex_numbers {
-        entry_number
-        pokedex {
+      height
+      weight
+      abilities {
+        is_hidden
+        slot
+        ability {
           name
           url
-        }
-      }
-      egg_groups {
-        name
-        url
-      }
-      color {
-        name
-        url
-      }
-      shape {
-        name
-        url
-      }
-      evolves_from_species {
-        name
-        url
-      }
-      evolution_chain {
-        id
-        baby_trigger_item {
-          name
-          url
-        }
-        chain {
-          species {
-            name
-            url
+          node {
+            names {
+              name
+              language {
+                name
+              }
+            }
           }
         }
       }
-      habitat {
+      forms {
         name
         url
       }
-      generation {
-        name
-        url
-      }
-
-      names {
-        name
-        language {
-          name
-          url
-        }
-      }
-      pal_park_encounters {
-        base_score
-        rate
-        area {
-          name
-          url
-        }
-      }
-      flavor_text_entries {
-        flavor_text
-        language {
-          name
-          url
-        }
+      game_indices {
+        game_index
         version {
           name
           url
         }
       }
-      form_descriptions {
-        description
-        language {
+      held_items {
+        item {
           name
           url
         }
+        version_details {
+          version {
+            name
+            url
+          }
+          rarity
+        }
       }
-      genera {
-        genus
-        language {
+      location_area_encounters
+      moves {
+        move {
           name
           url
         }
+        version_group_details {
+          move_learn_method {
+            name
+            url
+          }
+          version_group {
+            name
+            url
+          }
+          level_learned_at
+        }
       }
-      varieties {
-        is_default
-        pokemon {
+      sprites {
+        front_default
+        front_shiny
+        front_female
+        front_shiny_female
+        back_default
+        back_shiny
+        back_female
+        back_shiny_female
+      }
+      stats {
+        stat {
+          name
+          url
+        }
+        effort
+        base_stat
+      }
+      species {
+        name
+        node {
+          id
+          name
+          order
+          gender_rate
+          capture_rate
+          base_happiness
+          is_baby
+          hatch_counter
+          has_gender_differences
+          growth_rate {
+            name
+            url
+          }
+          pokedex_numbers {
+            entry_number
+            pokedex {
+              name
+              url
+            }
+          }
+          egg_groups {
+            name
+            url
+          }
+          color {
+            name
+            url
+          }
+          evolves_from_species {
+            name
+            url
+          }
+          evolution_chain {
+            id
+            baby_trigger_item {
+              name
+              url
+            }
+            chain {
+              species {
+                name
+                url
+              }
+            }
+          }
+          habitat {
+            name
+            url
+          }
+          generation {
+            name
+            url
+          }
+          names {
+            name
+            language {
+              name
+              url
+            }
+          }
+          flavor_text_entries {
+            flavor_text
+            language {
+              name
+              url
+            }
+            version {
+              name
+              url
+            }
+          }
+          genera {
+            genus
+            language {
+              name
+              url
+            }
+          }
+        }
+      }
+      types {
+        slot
+        type {
           name
           url
         }
@@ -130,7 +194,7 @@ const PokemonProfileQuery = ({ match }) => {
         if (error) {
           return <div>Error...</div>;
         }
-        return data && <PokemonProfile pokemon={data.getPokemonSpecies} />;
+        return data && <PokemonProfile pokemon={data.getPokemon} />;
       }}
     </Query>
   );
