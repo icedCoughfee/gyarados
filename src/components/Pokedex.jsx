@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 
 const Pokedex = ({ pokemonNodes, onLoadMore, loading }) => {
   const pkmnNodeList = pokemonNodes.map(PkmnConnection => PkmnConnection.node);
-  console.log("list", pkmnNodeList);
   return (
     <div>
       <h2>Pokemon</h2>
@@ -16,11 +15,7 @@ const Pokedex = ({ pokemonNodes, onLoadMore, loading }) => {
         alignItems="flex-start"
       >
         {pkmnNodeList.map(pkmn => (
-          <PokemonCard
-            key={pkmn.order}
-            name={pkmn.name}
-            image={pkmn.sprites.front_default}
-          />
+          <PokemonCard key={pkmn.order} pokemon={pkmn} />
         ))}
       </Grid>
       <Grid container direction="row" justify="center" alignItems="center">
