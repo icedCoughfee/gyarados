@@ -49,11 +49,10 @@ function PokemonProfile({ pokemon }) {
     light: {
       color: "#c9c9c9"
     },
-    image: {
-      display: "block",
-      width: "100%",
-      maxWidth: "420px",
-      margin: "auto"
+    bgImage: {
+      backgroundImage: `url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokemonId}.png)`,
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat"
     },
     chip: {
       margin: theme.spacing(1)
@@ -67,14 +66,7 @@ function PokemonProfile({ pokemon }) {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item sm={6} xs={12}>
-          <img
-            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokemonId}.png`}
-            alt="charmander"
-            className={classes.image}
-          />
-        </Grid>
-
+        <Grid item sm={6} xs={12} className={classes.bgImage}></Grid>
         <Grid item sm={6} xs={12}>
           <Typography variant="h3" component="h2">
             {pokemonName}
