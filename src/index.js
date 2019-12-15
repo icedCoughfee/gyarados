@@ -8,7 +8,7 @@ import ApolloClient from "apollo-boost";
 console.log(process.env);
 
 const client = new ApolloClient({
-  uri: "https://coughfee-magikarp.herokuapp.com/graphql"
+  uri: `${process.env.REACT_APP_GRAPHQL_ENDPOINT}`
 });
 
 //Apollo Client
