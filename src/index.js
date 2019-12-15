@@ -5,6 +5,8 @@ import App from "./components/App";
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
 
+console.log(process.env);
+
 const client = new ApolloClient({
   uri: `${process.env.REACT_APP_GRAPHQL_ENDPOINT}`
 });
