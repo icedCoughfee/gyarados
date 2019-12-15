@@ -39,9 +39,15 @@ function getPkmnGenderRatio(rate) {
     }
 }
 
+// property by language
+function getPropertyForLanguage(node, property, language) {
+    return node.names.filter(n => n.language.name === language)[0][property];
+}
+
 export {
     getPkmnImgId,
     getPkmnHeight,
     getPkmnWeight,
-    getPkmnGenderRatio
+    getPkmnGenderRatio,
+    getPropertyForLanguage
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import PokemonProfile from "./PokemonProfile";
+import CenteredContainer from "./layout/CenteredContainer";
 
 const PKMN_SPECIES_QUERY = gql`
   query GetPokemon($name: String) {
@@ -112,6 +113,15 @@ const PKMN_SPECIES_QUERY = gql`
           egg_groups {
             name
             url
+            node {
+              names {
+                name
+                language {
+                  name
+                  url
+                }
+              }
+            }
           }
           color {
             name
@@ -194,7 +204,13 @@ const PokemonProfileQuery = ({ match }) => {
         if (error) {
           return <div>Error...</div>;
         }
-        return data && <PokemonProfile pokemon={data.getPokemon} />;
+        return (
+          data && (
+            <CenteredContainer>
+              <PokemonProfile pokemon={data.getPokemon} />
+            </CenteredContainer>
+          )
+        );
       }}
     </Query>
   );
