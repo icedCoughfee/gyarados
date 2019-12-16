@@ -9,10 +9,7 @@ function CenteredContainer(props) {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="md">
-        <Typography
-          component="div"
-          style={{ display: "flex", height: "100vh", alignItems: "center" }}
-        >
+        <Typography component="div" style={{ display: "flex" }}>
           {props.children}
         </Typography>
       </Container>
