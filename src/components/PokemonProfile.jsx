@@ -53,6 +53,7 @@ function PokemonProfile({ pokemon }) {
       backgroundImage: `url(https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokemonId}.png)`,
       backgroundSize: "contain",
       backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
       minHeight: "250px"
     },
     chip: {
