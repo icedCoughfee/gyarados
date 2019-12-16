@@ -10,17 +10,17 @@ import CONSTANTS from "../constants";
 
 const useStyles = makeStyles(theme => ({
   cardWrapper: {
-    textDecoration: "none",
+    textDecoration: "none"
   },
   card: {
     minWidth: 345,
-    marginBottom: 10,
+    marginBottom: 10
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
-    backgroundSize: "contain",
-  },
+    backgroundSize: "contain"
+  }
 }));
 
 function PokemonCard({ pokemon }) {
@@ -33,7 +33,7 @@ function PokemonCard({ pokemon }) {
   return (
     <Link
       to={{
-        pathname,
+        pathname
       }}
       className={classes.cardWrapper}
     >
@@ -44,7 +44,7 @@ function PokemonCard({ pokemon }) {
       >
         <CardMedia
           className={classes.media}
-          image={`${CONSTANTS.PKMN_IMG_URL}/${getPkmnImgId(pokemon.id)}.png`}
+          image={`${CONSTANTS.PKMN_IMG_URL}${getPkmnImgId(pokemon.id)}.png`}
           title={name}
         />
         <CardContent>
