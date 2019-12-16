@@ -106,83 +106,71 @@ function PokemonProfile({ pokemon }) {
                 </Typography>
               </Grid>
             </Grid>
-
-            <Grid container className={classes.container}>
-              <Grid item xs={12}>
-                <Typography variant="h6" component="h2">
-                  Weight
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body1" component="h2">
-                  {pokemonWeight.imperial.toFixed(1)} lbs
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container className={classes.container}>
-              <Grid item xs={12}>
-                <Typography variant="h6" component="h2">
-                  Height
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body1" component="h2">
-                  {pokemonHeight.imperial.feet}'{pokemonHeight.imperial.inches}"
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container className={classes.container}>
-              <Grid item xs={12}>
-                <Typography variant="h6" component="h2">
-                  Abilities
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body1" component="h2">
-                  {abilities.map((abilityObj, index) => {
-                    let abilityName = getPropertyForLanguage(
-                      abilityObj.ability.node,
-                      "name",
-                      CONSTANTS.LANG_ENGLISH
-                    );
-                    return (
-                      <span key={abilityObj.ability.name}>
-                        {abilityName}
-                        {!index && abilities.length > 1 ? ", " : ""}
-                      </span>
-                    );
-                  })}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container className={classes.container}>
-              <Grid item xs={12}>
-                <Typography variant="h6" component="h2">
-                  Egg Groups
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body1" component="h2">
-                  {egg_groups.map((eggGroupObj, index) => {
-                    let eggGroupName = getPropertyForLanguage(
-                      eggGroupObj.node,
-                      "name",
-                      CONSTANTS.LANG_ENGLISH
-                    );
-                    return (
-                      <span key={eggGroupObj.name}>
-                        {eggGroupName}
-                        {!index && abilities.length > 1 ? ", " : ""}
-                      </span>
-                    );
-                  })}
-                </Typography>
-              </Grid>
-            </Grid>
+            <PokemonProfileGridAttribute
+              attribute="Weight"
+              value={`${pokemonWeight.imperial.toFixed(1)} lbs`}
+              classes={classes}
+            />
+            <PokemonProfileGridAttribute
+              attribute="Height"
+              value={`${pokemonHeight.imperial.feet}'${pokemonHeight.imperial.inches}"`}
+              classes={classes}
+            />
+            <PokemonProfileGridAttribute
+              attribute="Abilities"
+              value={abilities.map((abilityObj, index) => {
+                let abilityName = getPropertyForLanguage(
+                  abilityObj.ability.node,
+                  "name",
+                  CONSTANTS.LANG_ENGLISH
+                );
+                return (
+                  <span key={abilityObj.ability.name}>
+                    {abilityName}
+                    {!index && abilities.length > 1 ? ", " : ""}
+                  </span>
+                );
+              })}
+              classes={classes}
+            />
+            <PokemonProfileGridAttribute
+              attribute="Egg Groups"
+              value={egg_groups.map((eggGroupObj, index) => {
+                let eggGroupName = getPropertyForLanguage(
+                  eggGroupObj.node,
+                  "name",
+                  CONSTANTS.LANG_ENGLISH
+                );
+                return (
+                  <span key={eggGroupObj.name}>
+                    {eggGroupName}
+                    {!index && egg_groups.length > 1 ? ", " : ""}
+                  </span>
+                );
+              })}
+              classes={classes}
+            />
           </Grid>
         </Grid>
       </Fade>
     </div>
+  );
+}
+
+function PokemonProfileGridAttribute({ attribute, value, classes }) {
+  return (
+    <Grid container className={classes.container}>
+      <Grid item xs={12}>
+        <Typography variant="h6" component="h2">
+          {attribute}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="body1" component="h2">
+          {value}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }
 
