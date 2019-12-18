@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Fade from "@material-ui/core/Fade";
 import { getPkmnImgId } from "../utility/pokemon";
 import CONSTANTS from "../constants";
+import "../styles/main.scss";
 
 const useStyles = makeStyles(theme => ({
   cardWrapper: {

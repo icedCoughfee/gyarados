@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PokedexQuery from "./PokedexQuery";
 import PokemonProfileQuery from "./PokemonProfileQuery";
-import "../styles/index.css";
+import "../styles/main.scss";
 
 class App extends Component {
   render() {
