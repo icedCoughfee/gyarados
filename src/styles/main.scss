@@ -8,3 +8,7 @@ body {
     background-color: $primary !important;
     color: $primary-text !important;
 }
+
+:export {
+    brandPrimary: $primary;
+}
