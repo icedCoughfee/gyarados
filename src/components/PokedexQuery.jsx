@@ -28,6 +28,17 @@ const PKMN_QUERY = gql`
             url
           }
         }
+        species {
+          name
+          node {
+            names {
+              name
+              language {
+                name
+              }
+            }
+          }
+        }
       }
     }
   }

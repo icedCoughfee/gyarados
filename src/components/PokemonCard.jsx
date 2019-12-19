@@ -10,6 +10,7 @@ import { getPkmnImgId } from "../utility/pokemon";
 import CONSTANTS from "../constants";
 import "../styles/main.scss";
 import withWidth from "@material-ui/core/withWidth";
+import { getPropertyForLanguage } from "../utility/pokemon";
 
 const useStyles = makeStyles(theme => ({
   cardWrapper: {
@@ -34,8 +35,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function PokemonCard({ pokemon, width }) {
-  const { name, sprites } = pokemon;
+  const { name, sprites, species } = pokemon;
   const pathname = `/pokemon/${pokemon.name}`;
+  const pokemonName = getPropertyForLanguage(
+    species.node,
+    "name",
+    CONSTANTS.LANG_ENGLISH
+  );
 
   const classes = useStyles();
   const [hover, setHover] = useState(false);
@@ -71,7 +77,7 @@ function PokemonCard({ pokemon, width }) {
               color="textSecondary"
               component="span"
             >
-              {name}
+              {pokemonName}
             </Typography>
           </CardContent>
         </Card>
