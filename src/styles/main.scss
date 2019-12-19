@@ -9,6 +9,11 @@ body {
     color: $primary-text !important;
 }
 
+.main-content-section {
+    max-width: 1600px;
+    margin: 40px auto;
+}
+
 :export {
     brandPrimary: $primary;
 }
