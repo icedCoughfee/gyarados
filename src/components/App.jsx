@@ -10,13 +10,15 @@ class App extends Component {
     return (
       <Router>
         <NavBar />
-        <Switch>
-          <Route
-            path="/pokemon/:name"
-            render={props => <PokemonProfileQuery {...props} />}
-          />
-          <Route path="/" render={props => <PokedexQuery {...props} />} />
-        </Switch>
+        <div className="main-content-section">
+          <Switch>
+            <Route
+              path="/pokemon/:name"
+              render={props => <PokemonProfileQuery {...props} />}
+            />
+            <Route path="/" render={props => <PokedexQuery {...props} />} />
+          </Switch>
+        </div>
       </Router>
     );
   }

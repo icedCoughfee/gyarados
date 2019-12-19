@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,14 +9,19 @@ import Fade from "@material-ui/core/Fade";
 import { getPkmnImgId } from "../utility/pokemon";
 import CONSTANTS from "../constants";
 import "../styles/main.scss";
+import withWidth from "@material-ui/core/withWidth";
 
 const useStyles = makeStyles(theme => ({
   cardWrapper: {
     textDecoration: "none"
   },
   card: {
-    minWidth: 345,
-    marginBottom: 10
+    margin: "auto",
+    width: "96%",
+    padding: "10px 0"
+  },
+  cardContent: {
+    padding: "0 !important"
   },
   media: {
     height: 0,
@@ -28,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function PokemonCard({ pokemon }) {
+function PokemonCard({ pokemon, width }) {
   const { name, sprites } = pokemon;
   const pathname = `/pokemon/${pokemon.name}`;
 
@@ -38,6 +43,7 @@ function PokemonCard({ pokemon }) {
   const imgUrl = `${CONSTANTS.PKMN_IMG_URL}${getPkmnImgId(pokemon.id)}.png`;
   const [imgLoaded, setImgLoaded] = useState(false);
 
+  const { variant } = usePokemonCard(width);
   return (
     <Fade in={imgLoaded}>
       <Link
@@ -59,12 +65,11 @@ function PokemonCard({ pokemon }) {
           onMouseLeave={() => setHover(false)}
         >
           <CardMedia className={classes.media} image={imgUrl} title={name} />
-          <CardContent>
+          <CardContent align="center" className={classes.cardContent}>
             <Typography
-              variant="h5"
+              variant={variant}
               color="textSecondary"
-              component="p"
-              align="center"
+              component="span"
             >
               {name}
             </Typography>
@@ -75,4 +80,18 @@ function PokemonCard({ pokemon }) {
   );
 }
 
-export default PokemonCard;
+function usePokemonCard(width) {
+  let [variant, setVariant] = useState("h4");
+
+  useEffect(() => {
+    if (width == "xs" || width == "sm") {
+      setVariant("h6");
+    } else {
+      setVariant("h5");
+    }
+  }, [width]);
+
+  return { variant };
+}
+
+export default withWidth()(PokemonCard);
