@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Fade from "@material-ui/core/Fade";
 import { getPkmnImgId } from "../utility/pokemon";
 import CONSTANTS from "../constants";
-import "../styles/main.scss";
+import mainStyles from "../styles/main.scss";
 import withWidth from "@material-ui/core/withWidth";
 import { getPropertyForLanguage } from "../utility/pokemon";
 
@@ -19,10 +19,14 @@ const useStyles = makeStyles(theme => ({
   card: {
     margin: "auto",
     width: "96%",
-    padding: "10px 0"
+    padding: "10px 0",
+    backgroundColor: mainStyles.brandPrimaryShadow
   },
   cardContent: {
     padding: "0 !important"
+  },
+  cardText: {
+    color: mainStyles.brandPrimaryTextColor
   },
   media: {
     height: 0,
@@ -45,7 +49,7 @@ function PokemonCard({ pokemon, width }) {
 
   const classes = useStyles();
   const [hover, setHover] = useState(false);
-  const hoverClass = "MuiPaper-elevation5";
+  const hoverClass = "MuiPaper-elevation10";
   const imgUrl = `${CONSTANTS.PKMN_IMG_URL}${getPkmnImgId(pokemon.id)}.png`;
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -74,8 +78,8 @@ function PokemonCard({ pokemon, width }) {
           <CardContent align="center" className={classes.cardContent}>
             <Typography
               variant={variant}
-              color="textSecondary"
               component="span"
+              className={classes.cardText}
             >
               {pokemonName}
             </Typography>

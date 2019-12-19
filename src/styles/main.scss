@@ -1,5 +1,6 @@
 $primary: #2C2F33;
 $primary-text: #FFFFFF;
+$primary-shadow: #23272a;
 
 body {
     margin: 0;
@@ -16,4 +17,6 @@ body {
 
 :export {
     brandPrimary: $primary;
+    brandPrimaryTextColor: $primary-text;
+    brandPrimaryShadow: $primary-shadow;
 }
