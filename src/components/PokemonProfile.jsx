@@ -70,11 +70,18 @@ function PokemonProfile({ pokemon }) {
       width: "24px",
       height: "24px"
     },
+    chipContainer: {
+      display: "flex",
+      alignItems: "center"
+    },
     hiddenImg: {
       display: "none"
     },
     container: {
       marginBottom: theme.spacing(2)
+    },
+    pokemonName: {
+      marginBottom: "5px"
     },
     hiddenAbility: {
       backgroundColor: "grey",
@@ -101,12 +108,21 @@ function PokemonProfile({ pokemon }) {
             />
           </Grid>
           <Grid item sm={6} xs={12}>
-            <Typography variant="h3" component="h2">
+            <Typography
+              variant="h3"
+              component="h2"
+              className={classes.pokemonName}
+            >
               {pokemonName}
               <span className={classes.light}>#{pokemonId}</span>
             </Typography>
             <Grid container className={classes.container} justify="center">
-              <Grid item sm={5} xs={12}>
+              <Grid
+                item
+                sm={types.length > 1 ? 5 : 3}
+                xs={12}
+                className={classes.chipContainer}
+              >
                 {types
                   .sort((a, b) => a.slot - b.slot)
                   .map(typeObj => {
@@ -129,8 +145,8 @@ function PokemonProfile({ pokemon }) {
                     );
                   })}
               </Grid>
-              <Grid item sm={7} xs={12}>
-                <Typography variant="h4" component="h2">
+              <Grid item sm={types.length > 1 ? 7 : 9} xs={12}>
+                <Typography variant="h5" component="h2">
                   <span className={classes.light}>{pokemonGenera}</span>
                 </Typography>
               </Grid>
