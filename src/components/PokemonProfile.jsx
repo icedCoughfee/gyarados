@@ -8,6 +8,7 @@ import {
 } from "../utility/pokemon";
 import CONSTANTS from "../constants";
 import get from "lodash/get";
+import capitalize from "lodash/capitalize";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +16,8 @@ import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
+import typePallete from "../styles/types.scss";
+import mainStyles from "../styles/main.scss";
 
 function PokemonProfile({ pokemon }) {
   const { id, height, weight, order, abilities, stats, types } = pokemon;
@@ -59,7 +62,12 @@ function PokemonProfile({ pokemon }) {
       minHeight: "250px"
     },
     chip: {
-      margin: theme.spacing(1)
+      marginRight: "5px",
+      color: mainStyles.brandPrimaryTextColor
+    },
+    chipIcon: {
+      width: "24px",
+      height: "24px"
     },
     hiddenImg: {
       display: "none"
@@ -92,13 +100,27 @@ function PokemonProfile({ pokemon }) {
             </Typography>
             <Grid container className={classes.container} justify="center">
               <Grid item sm={5} xs={12}>
-                <Chip
-                  color="secondary"
-                  icon={<FaceIcon />}
-                  className={classes.chip}
-                  label="Fire"
-                />
-                <Chip color="primary" icon={<FaceIcon />} label="Dragon" />
+                {types
+                  .sort((a, b) => a.slot - b.slot)
+                  .map(typeObj => {
+                    const typeResourceName = typeObj.type.name;
+                    return (
+                      <Chip
+                        key={typeResourceName}
+                        icon={
+                          <img
+                            src={`/types/${typeResourceName}.png`}
+                            className={classes.chipIcon}
+                          />
+                        }
+                        label={capitalize(typeResourceName)}
+                        className={classes.chip}
+                        style={{
+                          backgroundColor: typePallete[typeResourceName]
+                        }}
+                      />
+                    );
+                  })}
               </Grid>
               <Grid item sm={7} xs={12}>
                 <Typography variant="h4" component="h2">
