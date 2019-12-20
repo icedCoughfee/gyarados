@@ -6,6 +6,7 @@ import {
   getPkmnGenderRatio,
   getPropertyForLanguage
 } from "../utility/pokemon";
+import { commaPerItem } from "../utility/text";
 import CONSTANTS from "../constants";
 import get from "lodash/get";
 import capitalize from "lodash/capitalize";
@@ -74,6 +75,12 @@ function PokemonProfile({ pokemon }) {
     },
     container: {
       marginBottom: theme.spacing(2)
+    },
+    hiddenAbility: {
+      backgroundColor: "grey",
+      padding: "0 2px",
+      borderRadius: "3px",
+      opacity: "0.8"
     }
   }));
 
@@ -140,19 +147,26 @@ function PokemonProfile({ pokemon }) {
             />
             <PokemonProfileGridAttribute
               attribute="Abilities"
-              value={abilities.map((abilityObj, index) => {
-                let abilityName = getPropertyForLanguage(
-                  abilityObj.ability.node,
-                  "name",
-                  CONSTANTS.LANG_ENGLISH
-                );
-                return (
-                  <span key={abilityObj.ability.name}>
-                    {abilityName}
-                    {!index && abilities.length > 1 ? ", " : ""}
-                  </span>
-                );
-              })}
+              value={abilities
+                .sort((a, b) => a.slot - b.slot)
+                .map((abilityObj, index) => {
+                  let abilityName = getPropertyForLanguage(
+                    abilityObj.ability.node,
+                    "name",
+                    CONSTANTS.LANG_ENGLISH
+                  );
+                  return (
+                    <span
+                      key={abilityObj.ability.name}
+                      className={
+                        abilityObj.is_hidden ? classes.hiddenAbility : ""
+                      }
+                    >
+                      {abilityName}
+                      {commaPerItem(abilities, index)}
+                    </span>
+                  );
+                })}
               classes={classes}
             />
             <PokemonProfileGridAttribute
@@ -166,7 +180,7 @@ function PokemonProfile({ pokemon }) {
                 return (
                   <span key={eggGroupObj.name}>
                     {eggGroupName}
-                    {!index && egg_groups.length > 1 ? ", " : ""}
+                    {commaPerItem(egg_groups, index)}
                   </span>
                 );
               })}
