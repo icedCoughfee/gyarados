@@ -41,6 +41,9 @@ function PokemonProfile({ pokemon }) {
   const pokemonName = names.filter(n => n.language.name === "en")[0].name;
   const pokemonId = getPkmnImgId(id);
   const pokemonGenera = genera.filter(g => g.language.name === "en")[0].genus;
+  const pokemonDescription = flavor_text_entries.filter(
+    g => g.language.name === "en"
+  )[0].flavor_text;
   const pokemonHeight = getPkmnHeight(height);
   const pokemonWeight = getPkmnWeight(weight);
   const pokemonGenderRatio = getPkmnGenderRatio(gender_rate);
@@ -83,6 +86,9 @@ function PokemonProfile({ pokemon }) {
     pokemonName: {
       marginBottom: "5px"
     },
+    attributeName: {
+      flexDirection: "column"
+    },
     hiddenAbility: {
       backgroundColor: "grey",
       padding: "0 2px",
@@ -98,7 +104,7 @@ function PokemonProfile({ pokemon }) {
     <div className={classes.root}>
       <Fade in={imgLoaded}>
         <Grid container spacing={3}>
-          <Grid item sm={6} xs={12} className={classes.bgImage}>
+          <Column sm={6} className={classes.bgImage}>
             <img
               src={pokemonBgImg}
               onLoad={() => {
@@ -106,21 +112,21 @@ function PokemonProfile({ pokemon }) {
               }}
               className={classes.hiddenImg}
             />
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Typography
-              variant="h3"
-              component="h2"
-              className={classes.pokemonName}
-            >
-              {pokemonName}
-              <span className={classes.light}>#{pokemonId}</span>
-            </Typography>
-            <Grid container className={classes.container} justify="center">
-              <Grid
-                item
+          </Column>
+          <Column sm={6}>
+            <Row className={classes.container}>
+              <Typography
+                variant="h3"
+                component="h2"
+                className={classes.pokemonName}
+              >
+                {pokemonName}
+                <span className={classes.light}>#{pokemonId}</span>
+              </Typography>
+            </Row>
+            <Row justify="center" className={classes.container}>
+              <Column
                 sm={types.length > 1 ? 5 : 3}
-                xs={12}
                 className={classes.chipContainer}
               >
                 {types
@@ -144,84 +150,110 @@ function PokemonProfile({ pokemon }) {
                       />
                     );
                   })}
-              </Grid>
-              <Grid item sm={types.length > 1 ? 7 : 9} xs={12}>
+              </Column>
+              <Column sm={types.length > 1 ? 7 : 9}>
                 <Typography variant="h5" component="h2">
                   <span className={classes.light}>{pokemonGenera}</span>
                 </Typography>
-              </Grid>
-            </Grid>
-            <PokemonProfileGridAttribute
-              attribute="Weight"
-              value={`${pokemonWeight.imperial.toFixed(1)} lbs`}
-              classes={classes}
-            />
-            <PokemonProfileGridAttribute
-              attribute="Height"
-              value={`${pokemonHeight.imperial.feet}'${pokemonHeight.imperial.inches}"`}
-              classes={classes}
-            />
-            <PokemonProfileGridAttribute
-              attribute="Abilities"
-              value={abilities
-                .sort((a, b) => a.slot - b.slot)
-                .map((abilityObj, index) => {
-                  let abilityName = getPropertyForLanguage(
-                    abilityObj.ability.node,
-                    "name",
-                    CONSTANTS.LANG_ENGLISH
-                  );
-                  return (
-                    <span
-                      key={abilityObj.ability.name}
-                      className={
-                        abilityObj.is_hidden ? classes.hiddenAbility : ""
-                      }
-                    >
-                      {abilityName}
-                      {commaPerItem(abilities, index)}
-                    </span>
-                  );
-                })}
-              classes={classes}
-            />
-            <PokemonProfileGridAttribute
-              attribute="Egg Groups"
-              value={egg_groups.map((eggGroupObj, index) => {
-                let eggGroupName = getPropertyForLanguage(
-                  eggGroupObj.node,
-                  "name",
-                  CONSTANTS.LANG_ENGLISH
-                );
-                return (
-                  <span key={eggGroupObj.name}>
-                    {eggGroupName}
-                    {commaPerItem(egg_groups, index)}
-                  </span>
-                );
-              })}
-              classes={classes}
-            />
-          </Grid>
+              </Column>
+            </Row>
+            <Row className={classes.container}>
+              <Typography variant="body1" component="h2">
+                {pokemonDescription}
+              </Typography>
+            </Row>
+            <Row className={classes.container}>
+              <Column xs={6} className={classes.attributeName}>
+                <PokemonProfileGridAttribute
+                  attribute="Weight"
+                  value={`${pokemonWeight.imperial.toFixed(1)} lbs`}
+                />
+              </Column>
+              <Column xs={6} className={classes.attributeName}>
+                <PokemonProfileGridAttribute
+                  attribute="Height"
+                  value={`${pokemonHeight.imperial.feet}'${pokemonHeight.imperial.inches}"`}
+                />
+              </Column>
+            </Row>
+            <Row className={classes.container}>
+              <Column xs={6} className={classes.attributeName}>
+                <PokemonProfileGridAttribute
+                  attribute="Abilities"
+                  value={abilities
+                    .sort((a, b) => a.slot - b.slot)
+                    .map((abilityObj, index) => {
+                      let abilityName = getPropertyForLanguage(
+                        abilityObj.ability.node,
+                        "name",
+                        CONSTANTS.LANG_ENGLISH
+                      );
+                      return (
+                        <span
+                          key={abilityObj.ability.name}
+                          className={
+                            abilityObj.is_hidden ? classes.hiddenAbility : ""
+                          }
+                        >
+                          {abilityName}
+                          {commaPerItem(abilities, index)}
+                        </span>
+                      );
+                    })}
+                />
+              </Column>
+              <Column xs={6} className={classes.attributeName}>
+                <PokemonProfileGridAttribute
+                  attribute="Egg Groups"
+                  value={egg_groups.map((eggGroupObj, index) => {
+                    let eggGroupName = getPropertyForLanguage(
+                      eggGroupObj.node,
+                      "name",
+                      CONSTANTS.LANG_ENGLISH
+                    );
+                    return (
+                      <span key={eggGroupObj.name}>
+                        {eggGroupName}
+                        {commaPerItem(egg_groups, index)}
+                      </span>
+                    );
+                  })}
+                />
+              </Column>
+            </Row>
+          </Column>
         </Grid>
       </Fade>
     </div>
   );
 }
 
-function PokemonProfileGridAttribute({ attribute, value, classes }) {
+function PokemonProfileGridAttribute({ attribute, value }) {
   return (
-    <Grid container className={classes.container}>
-      <Grid item xs={12}>
-        <Typography variant="h6" component="h2">
-          {attribute}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body1" component="h2">
-          {value}
-        </Typography>
-      </Grid>
+    <React.Fragment>
+      <Typography variant="h6" component="h2">
+        {attribute}
+      </Typography>
+      <Typography variant="body1" component="h2">
+        {value}
+      </Typography>
+    </React.Fragment>
+  );
+}
+
+function Column({ children, xs, ...rest }) {
+  const defaultXS = { ...rest, xs: xs ? xs : 12 };
+  return (
+    <Grid container item {...defaultXS}>
+      {children}
+    </Grid>
+  );
+}
+
+function Row({ children, ...rest }) {
+  return (
+    <Grid container item xs={12} {...rest}>
+      {children}
     </Grid>
   );
 }
