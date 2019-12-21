@@ -114,7 +114,7 @@ function PokemonProfile({ pokemon }) {
             />
           </Column>
           <Column sm={6}>
-            <Row className={classes.container}>
+            <Row>
               <Typography
                 variant="h3"
                 component="h2"
