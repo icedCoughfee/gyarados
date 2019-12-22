@@ -10,6 +10,7 @@ import { commaPerItem } from "../utility/text";
 import CONSTANTS from "../constants";
 import get from "lodash/get";
 import capitalize from "lodash/capitalize";
+import BaseStats from "./BaseStats";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -224,6 +225,7 @@ function PokemonProfile({ pokemon }) {
           </Column>
         </Grid>
       </Fade>
+      <BaseStats stats={stats} />
     </div>
   );
 }

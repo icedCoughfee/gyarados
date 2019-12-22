@@ -82,7 +82,14 @@ const PKMN_SPECIES_QUERY = gql`
       stats {
         stat {
           name
-          url
+          node {
+            names {
+              name
+              language {
+                name
+              }
+            }
+          }
         }
         effort
         base_stat
