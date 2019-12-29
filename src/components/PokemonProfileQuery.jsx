@@ -127,20 +127,16 @@ const PKMN_SPECIES_QUERY = gql`
             name
             url
           }
-          evolves_from_species {
-            name
-            url
-          }
+          id
           evolution_chain {
-            id
-            baby_trigger_item {
-              name
-              url
-            }
-            chain {
-              species {
-                name
-                url
+            url
+            node {
+              chain {
+                evolves_to {
+                  species {
+                    name
+                  }
+                }
               }
             }
           }
